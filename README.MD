@@ -58,3 +58,33 @@ Uma forma de deixar a expressão mais legível é usar algumas váriaveis auxili
   //Essa string é passada para dentro do Regex Engine
   var objetoRegex  = new RegExp(stringRegex, 'g');
 ```
+
+## Âncoras 
+
+O que queremos na verdade é encontrar o início e o fim de uma palavra, no geral, âncoras servem para que você delimite um começo e um fim em uma expressão regular. Basicamente você diz que a correspondência dessa expressão deve começar e terminar daquele jeito, e caso não corresponda, já seja descartada.
+
+> denise teste, 987.654.321-00,28 de Dezembro de 1991,(31)45562712,SCS Qd. 8 Bl. B-50,11,70333-900,Rio Grande 
+
+Regex
+
+```nano 
+  \bde\b
+``` 
+
+Repare que usamos o ``\b ``no início e no fim, ou seja, queremos buscar exatamente a preposição ``de``. Testando isso no nosso formulário, agora sim só selecionamos apenas a palavra ``de``, existe a inversão do \b, o non-word-boundary: \B (B maiúsculo), em outras palavras, a silaba por deve aparecer dentro de uma palavra, nunca no inicio ou fim.
+
+existem vários tipos de âncoras mas as mais comuns são: ``^, $ e \b``
+
+- ``^`` avalia a string inteira e garante que nenhuma expressão venha antes, ou seja, é a primeira expressão.
+- ``$`` de modo similiar ao ``^``, garante que a expressão seja a ultima da string. 
+
+> file:///Users/nico/Downloads/regex/index.html
+
+Regex
+
+```nano
+  ^file.+html$
+```
+
+Ou seja, tem que começar com file e terminar com html, caso qualquer expressão seja diferente disso ela será descartada.
+
