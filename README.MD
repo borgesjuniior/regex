@@ -23,6 +23,7 @@ O método exec devolve um resultado que possui a string match *e outras informa�
 - ``\w`` significa word char e é uma atalho para [A-Za-z0-9_]
 - ``.`` significa qualquer char
 - ``*`` serve para definir uma quantidade de chars, zero ou mais vezes 
+- ``+`` uma ou mais vezes
 - ``{}`` as chaves que servem para definir uma quantidade de caracteres específicas que é desejado encontrar (ex: ``a{1, 3}`` - letra ``a`` 1 até 3 vezes || ``\d* ``um dígito zero ou mais vezes)
 - ``?`` sigifica que o caractere anterior é opcional
 
@@ -88,3 +89,25 @@ Regex
 
 Ou seja, tem que começar com file e terminar com html, caso qualquer expressão seja diferente disso ela será descartada.
 
+## Grupos
+
+Grupos de caracteres em expressões regulares são formas de agrupar expressões. Com eles, podemos selecionar o que queremos ou não receber nos resultados.
+
+Até agora, estamos definindo expressões sem grupo e quando temos um match, é no resultado inteiro da expressão. Mas… e se quisermos pegar só um pedaço daquela expressão? Só uma parte em específico e o resto podemos até descartar? observe o exemplo abaixo:
+
+- queremos buscar o texto que está dentro das tags
+```html
+  <h1>Júnior</h1>
+```
+- regex busca o h1 e qualquer que seja o texto que tenha dentro
+```javascript
+  ^<h1>.+</h1>$
+```
+ Porém queremos buscar apenas o texto dentro da tag, para isso usamos os ``( )``, para envolver a expressão que queremos agrupar:
+
+ ```javascript
+  ^<h1>(.+)</h1>$
+```
+
+### Non-capturing group
+Como vimos no nosso exemplo, agora estamos pegando os valores dos grupos. Mas como solicitar à Regex Engine para que NÃO traga o valor de algum grupo? Para faze-lo, basta no início do grupo digitar (?:)
