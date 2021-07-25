@@ -111,3 +111,21 @@ Até agora, estamos definindo expressões sem grupo e quando temos um match, é 
 
 ### Non-capturing group
 Como vimos no nosso exemplo, agora estamos pegando os valores dos grupos. Mas como solicitar à Regex Engine para que NÃO traga o valor de algum grupo? Para faze-lo, basta no início do grupo digitar (?:)
+
+## Backreferences 
+
+Além do agrupamento, um outro uso dos parênteses é para capturar o texto que casa com a subexpressão que eles envolvem, para que ele possa ser usado depois. Dessa forma, usando backreferences, é possível utilizar o texto que foi lembrado pelos parênteses na mesma expressão regular. Essa funcionalidade está presente em muitas engines.
+
+```javascript 
+  <(h1|h2).+?>([\w\sõãí.]+)</(h1|h2)>
+```
+
+O agrupamento foi necessário para o | funcionar, para não interpretar o | literalmente. Ao testar, aparentemente a regex funciona, mas ela tem um erro grave. Ela também aceita alvos com h1 no início e h2 no final, o que queremos é que quando a tag for uma h1, no final também deve estar uma h1, igualmente para a tag h2. Essa dependência podemos definir através de back-references, uma referência para um texto já encontrado. A sintaxe é simples, usa-se um \ seguido pelo número do grupo, começando com 1.
+
+```javascript
+  <(h1|h2).+?>([\w\sõãí.]+)<\/\1>
+```
+
+## Ganancioso
+
+Todos os quantifiers são gananciosos por padrão. Isso significa que eles automaticamente selecionam o máximo de caracteres por padrão, Para deixar a regex (o quantifier) preguiçoso usamos ?, por exemplo [a-z]+?
